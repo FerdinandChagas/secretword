@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { verifyWord } from './assets/utils'
 
-const Game = () => {
+const Game = ({stageChange}) => {
 
     const [option, setOption] = useState('A');
     const [points, setPoints] = useState(0);
@@ -27,13 +27,11 @@ const Game = () => {
         }
     ];
 
-    const [play_word, setPlayWord] = useState(words_list[Math.floor(Math.random()*words_list.length)]);
+    const [play_word] = useState(words_list[Math.floor(Math.random()*words_list.length)]);
 
     const [gameWord, setGameWord] = useState(' '.repeat(play_word.word.length));
 
     const divs = [];
-    const alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    const selects = [];
 
     for (const element of gameWord){
         divs.push(
@@ -43,11 +41,7 @@ const Game = () => {
         );
     }
 
-    for(const letter of alphabet){
-        selects.push(
-            <option value={letter}>{letter}</option>
-        );
-    }
+
 
     function handlePlay() {
         const aux_game_word = gameWord;
@@ -76,6 +70,7 @@ const Game = () => {
         <input type="text" style={{ marginRight: "20px", width: "20px", padding: "5px"}} onChange={(e) => (setOption(e.target.value))}/>
         <button onClick={handlePlay}>JOGAR!</button>
         <h2>{result}</h2>
+        <button onClick={stageChange}>FINALIZAR</button>
     </>
   )
 }
